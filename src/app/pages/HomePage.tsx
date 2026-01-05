@@ -101,7 +101,7 @@ export function HomePage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <Card className="border-2 hover:border-blue-600 transition-colors">
               <CardContent className="p-6">
                 <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
@@ -137,7 +137,9 @@ export function HomePage() {
                 </p>
               </CardContent>
             </Card>
+          </div>
 
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
             <Card className="border-2 hover:border-blue-600 transition-colors">
               <CardContent className="p-6">
                 <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
