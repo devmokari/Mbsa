@@ -35,13 +35,26 @@ export function Navigation() {
       title: 'Treatment Options',
       path: '/treatment-options',
       submenu: [
-        { title: 'Weight Management Pathways', path: '/treatment-options#pathways' },
-        { title: 'Bariatric Surgery Overview', path: '/treatment-options#surgery' },
-        { title: 'Gastric Band', path: '/treatment-options#band' },
-        { title: 'Gastric Bypass', path: '/treatment-options#bypass' },
-        { title: 'Gastric Sleeve', path: '/treatment-options#sleeve' },
-        { title: 'Mini Bypass', path: '/treatment-options#mini' },
-        { title: 'Non-Surgical Weight Management', path: '/treatment-options#non-surgical' },
+        {
+          title: 'Bariatric Surgery Overview',
+          path: '/treatment-options#surgery',
+          children: [
+            { title: 'Gastric Band', path: '/treatment-options#band' },
+            { title: 'Gastric Bypass', path: '/treatment-options#bypass' },
+            { title: 'Gastric Sleeve', path: '/treatment-options#sleeve' },
+            { title: 'Mini Bypass', path: '/treatment-options#mini' },
+          ],
+        },
+        {
+          title: 'Non-Surgical Weight Management',
+          path: '/treatment-options#non-surgical',
+          children: [
+            { title: 'Lifestyle & Behavioural Changes', path: '/treatment-options#lifestyle' },
+            { title: 'Medical Treatments', path: '/treatment-options#medical-treatments' },
+            { title: 'Minimally Invasive Procedures (Endoscopic)', path: '/treatment-options#endoscopic' },
+          ],
+        },
+        { title: 'How Treatment Options Are Assessed', path: '/treatment-options#assessment' },
       ],
     },
     {
@@ -94,22 +107,55 @@ export function Navigation() {
                           {item.title}
                         </NavigationMenuTrigger>
                         <NavigationMenuContent>
-                          <ul className="grid w-[400px] gap-3 p-4">
-                            {item.submenu.map((subitem) => (
-                              <li key={subitem.path}>
-                                <NavigationMenuLink asChild>
-                                  <Link
-                                    to={subitem.path}
-                                    className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-gray-100 hover:text-blue-600 focus:bg-gray-100"
-                                  >
-                                    <div className="text-sm font-medium leading-none">
-                                      {subitem.title}
-                                    </div>
-                                  </Link>
-                                </NavigationMenuLink>
-                              </li>
-                            ))}
-                          </ul>
+                          {item.submenu.some((sub) => 'children' in sub && (sub as any).children?.length) ? (
+                            <div className="grid w-[520px] gap-4 p-4 sm:grid-cols-2">
+                              {item.submenu.map((subitem) => (
+                                <div key={subitem.path} className="space-y-2">
+                                  <NavigationMenuLink asChild>
+                                    <Link
+                                      to={subitem.path}
+                                      className="block select-none rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-gray-100 hover:text-blue-600 focus:bg-gray-100"
+                                    >
+                                      <div className="text-sm font-semibold leading-none">
+                                        {subitem.title}
+                                      </div>
+                                    </Link>
+                                  </NavigationMenuLink>
+                                  {'children' in subitem && (subitem as any).children && (
+                                    <ul className="space-y-1 pl-3 border-l border-gray-200">
+                                      {(subitem as any).children.map((child: { title: string; path: string }) => (
+                                        <li key={child.path}>
+                                          <Link
+                                            to={child.path}
+                                            className="block text-sm text-gray-600 hover:text-blue-600"
+                                          >
+                                            {child.title}
+                                          </Link>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  )}
+                                </div>
+                              ))}
+                            </div>
+                          ) : (
+                            <ul className="grid w-[400px] gap-3 p-4">
+                              {item.submenu.map((subitem) => (
+                                <li key={subitem.path}>
+                                  <NavigationMenuLink asChild>
+                                    <Link
+                                      to={subitem.path}
+                                      className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-gray-100 hover:text-blue-600 focus:bg-gray-100"
+                                    >
+                                      <div className="text-sm font-medium leading-none">
+                                        {subitem.title}
+                                      </div>
+                                    </Link>
+                                  </NavigationMenuLink>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
                         </NavigationMenuContent>
                       </>
                     ) : (
@@ -167,14 +213,29 @@ export function Navigation() {
                 {item.submenu && (
                   <div className="ml-4 mt-2 space-y-1">
                     {item.submenu.map((subitem) => (
-                      <Link
-                        key={subitem.path}
-                        to={subitem.path}
-                        className="block py-2 px-3 text-sm text-gray-600 hover:bg-gray-50 rounded-md"
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        {subitem.title}
-                      </Link>
+                      <div key={subitem.path} className="space-y-1">
+                        <Link
+                          to={subitem.path}
+                          className="block py-2 px-3 text-sm text-gray-600 hover:bg-gray-50 rounded-md"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          {subitem.title}
+                        </Link>
+                        {'children' in subitem && (subitem as any).children && (
+                          <div className="ml-4 space-y-1">
+                            {(subitem as any).children.map((child: { title: string; path: string }) => (
+                              <Link
+                                key={child.path}
+                                to={child.path}
+                                className="block py-1.5 px-3 text-sm text-gray-500 hover:bg-gray-50 rounded-md"
+                                onClick={() => setMobileMenuOpen(false)}
+                              >
+                                {child.title}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </div>
                     ))}
                   </div>
                 )}

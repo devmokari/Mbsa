@@ -84,34 +84,40 @@ export function TreatmentOptionsPage() {
             <TabsContent value="non-surgical" id="non-surgical">
               <h2 className="text-3xl mb-6">Non-Surgical Weight Management</h2>
               <div className="space-y-6">
-                <Card>
-                  <CardContent className="p-6">
-                    <h3 className="text-xl mb-3">Lifestyle & Behavioural Changes</h3>
-                    <p className="text-gray-600">
-                      Comprehensive support for sustainable dietary modifications, physical activity, and behavior change strategies.
-                    </p>
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardContent className="p-6">
-                    <h3 className="text-xl mb-3">Medical Treatments</h3>
-                    <p className="text-gray-600">
-                      Pharmacological options supervised by medical professionals to support weight management efforts.
-                    </p>
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardContent className="p-6">
-                    <h3 className="text-xl mb-3">Minimally Invasive Procedures (Endoscopic)</h3>
-                    <p className="text-gray-600">
-                      Less invasive endoscopic procedures that may be suitable for some patients.
-                    </p>
-                  </CardContent>
-                </Card>
+                <div id="lifestyle">
+                  <Card>
+                    <CardContent className="p-6">
+                      <h3 className="text-xl mb-3">Lifestyle & Behavioural Changes</h3>
+                      <p className="text-gray-600">
+                        Comprehensive support for sustainable dietary modifications, physical activity, and behavior change strategies.
+                      </p>
+                    </CardContent>
+                  </Card>
+                </div>
+                <div id="medical-treatments">
+                  <Card>
+                    <CardContent className="p-6">
+                      <h3 className="text-xl mb-3">Medical Treatments</h3>
+                      <p className="text-gray-600">
+                        Pharmacological options supervised by medical professionals to support weight management efforts.
+                      </p>
+                    </CardContent>
+                  </Card>
+                </div>
+                <div id="endoscopic">
+                  <Card>
+                    <CardContent className="p-6">
+                      <h3 className="text-xl mb-3">Minimally Invasive Procedures (Endoscopic)</h3>
+                      <p className="text-gray-600">
+                        Less invasive endoscopic procedures that may be suitable for some patients.
+                      </p>
+                    </CardContent>
+                  </Card>
+                </div>
               </div>
             </TabsContent>
 
-            <TabsContent value="assessment">
+            <TabsContent value="assessment" id="assessment">
               <h2 className="text-3xl mb-6">How Treatment Options Are Assessed</h2>
               <p className="text-lg text-gray-600 mb-8">
                 Treatment selection is based on comprehensive clinical assessment, patient preferences, and individual health goals.
